@@ -48,7 +48,7 @@ utils/
       update_version_tags.py
 ```
 
-You should then modify the settings in update_version_tags.py to suit your needs (See the Configuration section).
+You should then modify the settings in settings.py to suit your needs (See the Configuration section).
 
 When you have the settings tuned, you can run the script with:
 
@@ -58,7 +58,7 @@ When you have the settings tuned, you can run the script with:
 
 Put the update_version_tags.py script in the root of your project.
 
-You should then modify the settings in update_version_tags.py to suit your needs (See the Configuration section).
+You should then modify the settings in settings.py to suit your needs (See the Configuration section).
 
 When you have the settings tuned, you can run the script with:
 
@@ -66,7 +66,7 @@ When you have the settings tuned, you can run the script with:
 
 # Configuration
 
-Both versions (Python and Django) import settings.py to get a VERSION_TAG_SETTINGS dict, though the Django version imports using the `from django.conf import settings` method.
+Both versions (Python and Django) import settings.py from the root directory of your project to get a VERSION_TAG_SETTINGS dict, though the Django version imports using the `from django.conf import settings` method.
 
 ## Settings
 
