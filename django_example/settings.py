@@ -2,7 +2,7 @@
 
 VERSION_TAG_SETTINGS = { # commented lines are defaults
 #    'link_root': 'site_media', # path snippet to media in url (no slashes).
-#    'file_root': 'media', # relative path to media (no leading or trailing slash)
+    'file_root': 'django_example/media', # relative path to media (no leading or trailing slash)
 #    'debug': True, # Should probably keep True, prints out what it is changing.
     'blacklist': ['media/build'], # A list of substrings of source files+paths you don't want updated
     'trigger_file_sets': [ # a list of tuples where the left being in the name of a file that changed     triggers the right to be added to the list of files to update the version tags on.

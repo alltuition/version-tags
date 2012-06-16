@@ -82,7 +82,7 @@ This should be something non-common to prevent false-positives as it is used to 
 
 default: "media"
 
-This is the path to the media directory without leading or trailing slashes.
+This is the path to the media directory __relative to the git repository root__ without leading or trailing slashes.
 
 ### debug
 

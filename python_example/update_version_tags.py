@@ -80,7 +80,9 @@ class VersionUpdater():
                 try:
                     vtag = line.split('version-')[1].split('/')[0]
                 except: pass
-            files_with_reference.append((line.lstrip('./').split(':')[0], vtag))
+            f_tuple = (line.lstrip('./').split(':')[0], vtag)
+            if f_tuple not in files_with_reference:
+                files_with_reference.append(f_tuple)
 
         self._update_vtags_in_files(stripped, files_with_reference)
         self.files_handled.append(f)
@@ -98,9 +100,9 @@ class VersionUpdater():
         for f, old_vtag in files_with_reference:
             if self.debug: print '\t', f
             if old_vtag != '':
-                self._shell_to_str('sed -i "s#'+self.link_root+'/version-'+old_vtag+include_name+'#'+self.link_root+'/version-'+vtag+include_name+'#" ' + f)
+                self._shell_to_str('sed -i "s#'+self.link_root+'/version-'+old_vtag+'/'+include_name+'#'+self.link_root+'/version-'+vtag+'/'+include_name+'#" ' + f)
             else:
-                self._shell_to_str('sed -i "s#'+self.link_root+include_name+'#'+self.link_root+'/version-'+strvtag+include_name+'#" ' + f)
+                self._shell_to_str('sed -i "s#'+self.link_root+'/'+include_name+'#'+self.link_root+'/version-'+vtag+'/'+include_name+'#" ' + f)
             self.something_updated = True
 
         if self.debug: print
