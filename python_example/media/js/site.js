@@ -1,4 +1,4 @@
 function sample_function()
 {
-    alert('Javascript loaded') ;
+    alert('Javascript loaded');
 }
