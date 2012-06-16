@@ -18,10 +18,6 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
-    print '^'+settings.STATIC_URL_REL+'version-[^/]+/(?P<path>.*)$'
-    print settings.STATIC_ROOT
-    print '^'+settings.STATIC_URL_REL+'(?P<path>.*)$'
-
     urlpatterns += patterns('',
         (r'^'+settings.STATIC_URL_REL+'version-[^/]+/(?P<path>.*)$', \
                 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
