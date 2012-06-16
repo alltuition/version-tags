@@ -71,7 +71,8 @@ class VersionUpdater():
 
     def _update_references_to_file(self, f):
         if self.debug: print '-------', f, '-------'
-        stripped = f.lstrip(self.file_root)
+        if self.file_root not in f: return
+        stripped = f[len(self.file_root):]
         files_with_reference = []
         for line in self._shell_to_str('grep -R "'+stripped+'" ./ --exclude-dir=".git" --exclude="*.pyc" | grep '+self.link_root).strip().split('\n'):
             if not line: continue
@@ -80,7 +81,7 @@ class VersionUpdater():
                 try:
                     vtag = line.split('version-')[1].split('/')[0]
                 except: pass
-            f_tuple = (line.lstrip('./').split(':')[0], vtag)
+            f_tuple = (line[len('./'):].split(':')[0], vtag)
             if f_tuple not in files_with_reference:
                 files_with_reference.append(f_tuple)
 
@@ -100,9 +101,9 @@ class VersionUpdater():
         for f, old_vtag in files_with_reference:
             if self.debug: print '\t', f
             if old_vtag != '':
-                self._shell_to_str('sed -i "s#'+self.link_root+'/version-'+old_vtag+'/'+include_name+'#'+self.link_root+'/version-'+vtag+'/'+include_name+'#" ' + f)
+                self._shell_to_str('sed -i "s#'+self.link_root+'/version-'+old_vtag+include_name+'#'+self.link_root+'/version-'+vtag+include_name+'#" ' + f)
             else:
-                self._shell_to_str('sed -i "s#'+self.link_root+'/'+include_name+'#'+self.link_root+'/version-'+vtag+'/'+include_name+'#" ' + f)
+                self._shell_to_str('sed -i "s#'+self.link_root+include_name+'#'+self.link_root+'/version-'+vtag+include_name+'#" ' + f)
             self.something_updated = True
 
         if self.debug: print
