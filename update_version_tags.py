@@ -129,8 +129,10 @@ class VersionUpdater():
         while line and line_stripped != stripped_commit_message:
             line = self._shell_to_str("git log | sed -n " +str(i)+ "p | sed 's/[^a-zA-Z0-9]//g'")
             line_stripped = line.strip()
-            if 'commit' in line_stripped and len(line_stripped) in [56, 50]:
-                start_commit = re.match(r'[3m]*commit(.{40})m?', line_stripped).group(1)
+            if 'commit' in line_stripped:
+                match = re.match(r'[3m]*commit(.{40})m?', line_stripped)
+                if match:
+                    start_commit = match.group(1)
             i += 1
         self.start_commit = start_commit
 
